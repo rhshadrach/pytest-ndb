@@ -37,5 +37,82 @@ jobs:
       - name: Show versions
         run: pip freeze
 
-      - name: Run tests
+      # Not good style, but we can avoid setup/teardown by additional run steps
+
+      - name: Install pytest 7.4.0
+        run: pip install pytest==7.4.0
+
+      - name: Run tests 7.4.0
+        run: pytest tests/
+
+      - name: Install pytest 7.3.2
+        run: pip install pytest==7.3.2
+
+      - name: Run tests 7.3.2
+        run: pytest tests/
+
+      - name: Install pytest 7.3.1
+        run: pip install pytest==7.3.1
+
+      - name: Run tests 7.3.1
+        run: pytest tests/
+
+      - name: Install pytest 7.3.0
+        run: pip install pytest==7.3.0
+
+      - name: Run tests 7.3.0
+        run: pytest tests/
+
+      - name: Install pytest 7.2.2
+        run: pip install pytest==7.2.2
+
+      - name: Run tests 7.2.2
+        run: pytest tests/
+
+      - name: Install pytest 7.2.1
+        run: pip install pytest==7.2.1
+
+      - name: Run tests 7.2.1
+        run: pytest tests/
+
+      - name: Install pytest 7.2.0
+        run: pip install pytest==7.2.0
+
+      - name: Run tests 7.2.0
+        run: pytest tests/
+
+      - name: Install pytest 7.1.3
+        run: pip install pytest==7.1.3
+
+      - name: Run tests 7.1.3
+        run: pytest tests/
+
+      - name: Install pytest 7.1.2
+        run: pip install pytest==7.1.2
+
+      - name: Run tests 7.1.2
+        run: pytest tests/
+
+      - name: Install pytest 7.1.1
+        run: pip install pytest==7.1.1
+
+      - name: Run tests 7.1.1
+        run: pytest tests/
+
+      - name: Install pytest 7.1.0
+        run: pip install pytest==7.1.0
+
+      - name: Run tests 7.1.0
+        run: pytest tests/
+
+      - name: Install pytest 7.0.1
+        run: pip install pytest==7.0.1
+
+      - name: Run tests 7.0.1
+        run: pytest tests/
+
+      - name: Install pytest 7.0.0
+        run: pip install pytest==7.0.0
+
+      - name: Run tests 7.0.0
         run: pytest tests/
