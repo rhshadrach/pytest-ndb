@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pytest-ndb"
+authors = [
+    {name = "Richard Shadrach", email = "rhshadrach@gmail.com"},
+]
+description = "Open Source Software Health Report"
+readme = "README.md"
+requires-python = ">=3.7"
+license = {text = "BSD-3-Clause"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+]
+dependencies = [
+    "pytest",
+]
+dynamic = ["version"]
+
+[tool.setuptools.dynamic]
+version = {file = "pytest_ndb/VERSION"}
+
+[project.urls]
+homepage = 'https://github.com/rhshadrach/pytest-ndb'
+documentation = 'https://rhshadrach.github.io/pytest-ndb/'
+repository = 'https://github.com/rhshadrach/pytest-ndb'
+
+[project.optional-dependencies]
+lint = [
+    "black",
+    "codespell",
+    "flake8",
+    "isort",
+    "mypy",
+    "pylint",
+    "pyright",
+    "pyupgrade",
+    "ruff",
+    "vulture",
+]
+doc = ["sphinx"]
+test = ["pytest"]
+dev = ["pytest-ndb[lint, test, doc]"]
+
+#[tool.codespell]
+#ignore-words-list = "ser"
+
+[tool.isort]
+profile = "black"
