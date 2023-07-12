@@ -1,4 +1,7 @@
+from __future__ import annotations
+
 import contextlib
+import importlib
 import os
 import sys
 import traceback
@@ -88,11 +91,7 @@ def run(package, test: str) -> dict[str, Any]:
     with temp_setattr(sys, "dont_write_bytecode", True):
         # n0 to disable pytest-xdist; this will raise if xdist is not installed
         config_args = [path]
-        try:
-            pass
-        except ImportError:
-            pass
-        else:
+        if importlib.util.find_spec("xdist") is not None:
             # xdist is available; disable it
             config_args.append("-n0")
         config = _prepareconfig(config_args)
