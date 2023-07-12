@@ -1,0 +1,33 @@
+name: Docs
+on:
+  pull_request:
+    branches:
+      - main
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.event_name == 'push' && github.run_number || github.ref }}-${{ matrix.os }}
+  cancel-in-progress: true
+
+jobs:
+  docs:
+    strategy:
+      matrix:
+        os: [ macos-latest, windows-latest, ubuntu-latest ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v3
+
+      - name: Install package dependencies
+        run: pip install .[test]
+
+      - name: Show versions
+        run: pip freeze
+
+      - name: Run tests
+        run: pytest tests/
