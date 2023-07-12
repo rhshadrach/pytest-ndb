@@ -13,6 +13,7 @@ jobs:
       matrix:
         os: [ macos-latest, windows-latest, ubuntu-latest ]
         python_version: [ "3.7", "3.8", "3.9", "3.10", "3.11" ]
+        install_xdist: [ true, false ]
     concurrency:
       group: ${{ github.event_name == 'push' && github.run_number || github.ref }}-${{ matrix.os }}-${{ matrix.python_version }}
       cancel-in-progress: true
@@ -28,6 +29,10 @@ jobs:
 
       - name: Install package dependencies
         run: pip install .[test]
+
+      - name: Maybe install pytest-xdist
+        if: ${{ matrix.install_xdist }}
+        run: pip install pytest-xdist
 
       - name: Show versions
         run: pip freeze
