@@ -1,4 +1,4 @@
-name: Docs
+name: Tests
 on:
   pull_request:
     branches:
@@ -6,16 +6,15 @@ on:
 permissions:
   contents: read
 
-concurrency:
-  group: ${{ github.event_name == 'push' && github.run_number || github.ref }}-${{ matrix.os }}
-  cancel-in-progress: true
-
 jobs:
-  docs:
+  tests:
     strategy:
       matrix:
         os: [ macos-latest, windows-latest, ubuntu-latest ]
-    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.event_name == 'push' && github.run_number || github.ref }}-${{ matrix.os }}
+      cancel-in-progress: true
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
