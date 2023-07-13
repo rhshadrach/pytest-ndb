@@ -58,4 +58,4 @@ def test_parametrization_passes(x):
 def test_parametrization_fails(x):
     y = "z"
     assert x == 5
-    assert y == "z"
+    assert y == "w"
