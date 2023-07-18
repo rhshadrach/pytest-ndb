@@ -1,10 +1,10 @@
 # pytest-ndb
 
-Interactively debug a failing pytest test in a notebook or any REPL.
+Interactively debug a failing pytest test in a notebook or any REPL. See `Usage` below for examples.
 
-In our opinion, developers should prefer to debug failing tests using a debugger such as `pdb`. However for certain applications, such as those that occur in data science with large complex data sets or long running models, this is can be quite difficult. Debugging a failing test can often mean analyzing data, for which there is little support in a debugger as opposed to a notebook.
+In our opinion, developers should often prefer to debug failing tests using a debugger such as `pdb`. However for certain applications, such as those that occur in data science with large complex data sets or long running models, this is can be quite difficult. Debugging a failing test can often mean analyzing data, for which there is little support in a debugger and where notebooks truly shine.
 
-To debug in a notebook, all of the code from the test, including fixtures and parametrizations, must be copied. For simple tests this might not be an issue, but for a complex test it can be quite time consuming. Instead, you can use `pytest-ndb`!
+Traditionally to debug in a notebook, all of the code from the test, including fixtures and parametrizations, must be copied. For simple tests this might not be an issue, but for a complex test it can be quite time consuming. Instead, you can use `pytest-ndb`!
 
 ## Usage
 
@@ -16,7 +16,7 @@ FAILED pytest_ndb/tests.py::test_fixture_double_fails - AssertionError: assert '
 FAILED pytest_ndb/tests.py::test_parametrization_fails[5] - AssertionError: assert 'z' == 'w'
 ```
 
-When this occurs, you can take the path produced by this summary and feed it into `pytest-ndb.run` in a notebook passing the package and the path.
+When this occurs, you can take the path produced by this summary and feed it into `pytest_ndb.run` in a notebook passing the package and the path.
 
 ```python
 import pytest_ndb
@@ -33,7 +33,6 @@ rootdir: /home/richard/dev/pytest-ndb
 plugins: hypothesis-6.80.0, anyio-3.7.0, asyncio-0.21.0, localserver-0.0.0, cov-4.1.0, xdist-3.3.1, cython-0.2.1
 asyncio: mode=strict
 collected 1 item
-Test failed
 Traceback (most recent call last):
   File "/home/richard/dev/pytest-ndb/pytest_ndb/__init__.py", line 125, in run
     test_function(
@@ -71,3 +70,9 @@ test_locals = pytest_ndb.run(pytest_ndb, "pytest_ndb/tests.py::test_parametrizat
 ## Installation
 
 To come.
+
+## Development state
+
+`pytest-ndb` is largely a hack on the `pytest` internals, and likely always will be. In addition, we must guess at the root path of your package, and in certain cases we may guess wrong. While we test this package using parametrizations and fixtures, other `pytest` features may not work.
+
+This package is rather new, and so users should not be surprised to encounter issues. Is something not working? Report an issue on our [GitHub issue tracker](https://github.com/rhshadrach/pytest-ndb/issues)!
