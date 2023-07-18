@@ -44,8 +44,5 @@ doc = ["sphinx"]
 test = ["pytest"]
 dev = ["pytest-ndb[lint, test, doc]"]
 
-#[tool.codespell]
-#ignore-words-list = "ser"
-
 [tool.isort]
 profile = "black"

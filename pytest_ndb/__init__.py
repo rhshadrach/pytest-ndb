@@ -2,9 +2,9 @@ from __future__ import annotations
 
 import contextlib
 import importlib
-import os
 import sys
 import traceback
+from pathlib import Path
 from typing import Any, Iterator, no_type_check
 
 
@@ -66,7 +66,8 @@ def run(package, test: str) -> dict[str, Any]:
 
     Args:
         package: Package that test exists in.
-        test: pytest test relative to the root directory of the project.
+        test: pytest test relative to the root directory of the project. The test
+            specified must be a single test (including parametrizations).
 
     Returns:
         Local variables from the test, regardless if the test succeeds or fails.
@@ -83,9 +84,11 @@ def run(package, test: str) -> dict[str, Any]:
 
     FixtureRequest._schedule_finalizers = disable_finalizers
 
-    base_path = os.path.dirname(package.__file__)
-    # TODO: Is this reliable?
-    path = os.path.join(base_path, "..", test)
+    path = (Path(package.__file__).parent / "..").resolve()
+    if path.parts[-1] == "src":
+        # Go up one more level
+        path = path / ".."
+    path = path / test
 
     # Sometimes repo location is read-only
     with temp_setattr(sys, "dont_write_bytecode", True):
@@ -127,9 +130,6 @@ def run(package, test: str) -> dict[str, Any]:
         )
     except Exception:
         traceback.print_exc()
-        print("Test failed")
-    else:
-        print("Test passed")
     finally:
         result = {
             k: v for k, v in test_function.locals.items() if not _is_pytest_internal(k)
