@@ -35,8 +35,7 @@ jobs:
 
       - name: Test package
         run: |
-          python -c " \
-          import pytest_ndb; \
-          result = pytest_ndb.run(pytest_ndb, 'pytest_ndb/tests.py::test_basic_passes'); \
-          assert result == {'x': 5}; \
+          python -c "import pytest_ndb; \
+            result = pytest_ndb.run(pytest_ndb, 'pytest_ndb/tests.py::test_basic_passes'); \
+            assert result == {'x': 5}; \
           "
