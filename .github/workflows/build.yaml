@@ -9,7 +9,7 @@ permissions:
 jobs:
   wheel:
     concurrency:
-      group: ${{ github.event_name == 'push' && github.run_number || github.ref }}
+      group: build-${{ github.event_name == 'push' && github.run_number || github.ref }}
       cancel-in-progress: true
     runs-on: ubuntu-latest
     steps:
@@ -31,7 +31,7 @@ jobs:
         run: python -m build
 
       - name: Install pytest-ndb
-        run: pip install pytest_ndb*.whl
+        run: pip install dist/pytest_ndb*.whl
 
       - name: Test package
         run: python -c "import pytest_ndb; pytest_ndb.run(pytest_ndb, 'pytest_ndb/tests.py::test_basic_passes')"
