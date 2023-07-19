@@ -14,9 +14,7 @@ license = {text = "BSD-3-Clause"}
 classifiers = [
     "Programming Language :: Python :: 3",
 ]
-dependencies = [
-    "pytest",
-]
+dependencies = ["pytest"]
 dynamic = ["version"]
 
 [tool.setuptools.dynamic]
