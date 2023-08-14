@@ -63,13 +63,15 @@ test_locals = pytest_ndb.run(pytest_ndb, "pytest_ndb/tests.py::test_parametrizat
 `pytest-ndb` requires:
 
  - At least Python 3.7.
- - pytest between versions `7.0.0` and `7.4.0`.
+ - pytest between versions `7.0.0` and `7.4.0`. Other versions **may** work.
  - The test path provided to `pytets-ndb` must identify a unique test (only one parametrization).
  - If parametrizations are used, they must be deterministic.
 
 ## Installation
 
-To come.
+```bash
+pip install pytest-ndb
+```
 
 ## Development state
 
