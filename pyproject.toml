@@ -7,7 +7,7 @@ name = "pytest-ndb"
 authors = [
     {name = "Richard Shadrach", email = "rhshadrach@gmail.com"},
 ]
-description = "Open Source Software Health Report"
+description = "pytest notebook debugger"
 readme = "README.md"
 requires-python = ">=3.7"
 license = {text = "BSD-3-Clause"}
@@ -24,6 +24,7 @@ version = {file = "pytest_ndb/VERSION"}
 homepage = 'https://github.com/rhshadrach/pytest-ndb'
 documentation = 'https://github.com/rhshadrach/pytest-ndb'
 repository = 'https://github.com/rhshadrach/pytest-ndb'
+issues = 'https://github.com/rhshadrach/pytest-ndb/issues'
 
 [project.optional-dependencies]
 lint = [
