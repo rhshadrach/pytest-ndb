@@ -1,0 +1,47 @@
+name: Build and test wheel
+on:
+  pull_request:
+    branches:
+      - main
+permissions:
+  contents: read
+
+jobs:
+  wheel:
+    concurrency:
+      group: build-${{ github.event_name == 'push' && github.run_number || github.ref }}
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install build and wheel
+        run: pip install build wheel
+
+      - name: Show versions
+        run: pip freeze
+
+      - name: Build package
+        run: python -m build
+
+      - name: Install pytest-ndb
+        run: pip install dist/pytest_ndb*.whl
+
+      - name: Test package
+        run: |
+          python -c "import pytest_ndb; \
+            result = pytest_ndb.run(pytest_ndb, 'pytest_ndb/tests.py::test_basic_passes'); \
+            assert result == {'x': 5}; \
+          "
+
+      - name: Upload dist
+        uses: actions/upload-artifact@v3
+        with:
+          name: pytest-ndb-dist
+          path: dist/*

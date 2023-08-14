@@ -14,9 +14,7 @@ license = {text = "BSD-3-Clause"}
 classifiers = [
     "Programming Language :: Python :: 3",
 ]
-dependencies = [
-    "pytest",
-]
+dependencies = ["pytest"]
 dynamic = ["version"]
 
 [tool.setuptools.dynamic]
@@ -24,7 +22,7 @@ version = {file = "pytest_ndb/VERSION"}
 
 [project.urls]
 homepage = 'https://github.com/rhshadrach/pytest-ndb'
-documentation = 'https://rhshadrach.github.io/pytest-ndb/'
+documentation = 'https://github.com/rhshadrach/pytest-ndb'
 repository = 'https://github.com/rhshadrach/pytest-ndb'
 
 [project.optional-dependencies]

@@ -15,7 +15,7 @@ jobs:
         python_version: [ "3.7", "3.8", "3.9", "3.10", "3.11" ]
         install_xdist: [ true, false ]
     concurrency:
-      group: ${{ github.event_name == 'push' && github.run_number || github.ref }}-${{ matrix.os }}-${{ matrix.python_version }}-$${{ matrix.install_xdist }}
+      group: tests-${{ github.event_name == 'push' && github.run_number || github.ref }}-${{ matrix.os }}-${{ matrix.python_version }}-$${{ matrix.install_xdist }}
       cancel-in-progress: true
     runs-on: ${{ matrix.os }}
     steps:

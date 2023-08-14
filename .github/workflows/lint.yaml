@@ -1,4 +1,4 @@
-name: Pre-commit
+name: Lint
 on:
   pull_request:
     branches:
@@ -7,9 +7,9 @@ permissions:
   contents: read
 
 jobs:
-  pre-commit:
+  lint:
     concurrency:
-      group: ${{ github.event_name == 'push' && github.run_number || github.ref }}
+      group: lint-${{ github.event_name == 'push' && github.run_number || github.ref }}
       cancel-in-progress: true
     runs-on: ubuntu-latest
     steps:
