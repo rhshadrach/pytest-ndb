@@ -1,7 +1,3 @@
-[build-system]
-requires = ["setuptools", "setuptools-scm"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "pytest-ndb"
 authors = [
@@ -45,3 +41,7 @@ dev = ["pytest-ndb[lint, test, doc]"]
 
 [tool.isort]
 profile = "black"
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
