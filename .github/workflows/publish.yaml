@@ -1,6 +1,9 @@
 name: Publish to PyPI
 
-on: push
+on:
+  push:
+    branches:
+      - 'main'
 
 jobs:
   build:
@@ -37,6 +40,7 @@ jobs:
       name: pypi
       url: https://pypi.org/p/pytest-ndb
     permissions:
+      contents: read
       id-token: write  # IMPORTANT: mandatory for trusted publishing
     steps:
       - name: Download dists
