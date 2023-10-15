@@ -1,14 +1,14 @@
 # pytest-ndb
 
-Interactively debug a failing pytest test in a notebook or any REPL. See `Usage` below for examples.
+Interactively debug a failing pytest test in a notebook or REPL. See `Usage` below for examples.
 
-In our opinion, developers should often prefer to debug failing tests using a debugger such as `pdb`. However for certain applications, such as those that occur in data science with large complex data sets or long running models, this is can be quite difficult. Debugging a failing test can often mean analyzing data, for which there is little support in a debugger and where notebooks truly shine.
+In our opinion, developers should often prefer to debug failing tests using a debugger such as `pdb`. However for certain applications, such as those that occur in data science with large complex data sets or long running models, this is can be quite difficult. Debugging a failing test can mean having to analyze data, for which there is little support in a debugger and where notebooks truly shine.
 
 Traditionally to debug in a notebook, all of the code from the test, including fixtures and parametrizations, must be copied. For simple tests this might not be an issue, but for a complex test it can be quite time consuming. Instead, you can use `pytest-ndb`!
 
 ## Usage
 
-When tests fail, `pytest` will produce a summary of the failures such as follows.
+When tests fail, `pytest` will produce a summary of the failures.
 
 ```
 FAILED pytest_ndb/tests.py::test_fixture_single_fails - AssertionError: assert 'x' == 'y'
@@ -63,7 +63,7 @@ test_locals = pytest_ndb.run(pytest_ndb, "pytest_ndb/tests.py::test_parametrizat
 `pytest-ndb` requires:
 
  - At least Python 3.7.
- - pytest between versions `7.0.0` and `7.4.0`. Other versions **may** work.
+ - pytest between versions `7.0.0` and `7.4.2`. Other versions **may** work.
  - The test path provided to `pytets-ndb` must identify a unique test (only one parametrization).
  - If parametrizations are used, they must be deterministic.
 
@@ -75,6 +75,6 @@ pip install pytest-ndb
 
 ## Development state
 
-`pytest-ndb` is largely a hack on the `pytest` internals, and likely always will be. In addition, we must guess at the root path of your package, and in certain cases we may guess wrong. While we test this package using parametrizations and fixtures, other `pytest` features may not work.
+`pytest-ndb` is largely a hack on the `pytest` internals, and likely will always be. In addition, we must guess at the root path of your package, and in certain cases we may guess wrong. While we test this package using parametrizations and fixtures, other `pytest` features may not work.
 
 This package is rather new, and so users should not be surprised to encounter issues. Is something not working? Report an issue on our [GitHub issue tracker](https://github.com/rhshadrach/pytest-ndb/issues)!
