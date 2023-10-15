@@ -1,10 +1,16 @@
-name: Publish to PyPI
+name: Publish
 
 on:
   push:
     branches:
       - 'main'
+  release:
+    types: [published]
   workflow_dispatch:
+    inputs:
+      publish_to_pypi:
+        type: boolean
+        default: false
 
 jobs:
   build:
@@ -34,7 +40,7 @@ jobs:
 
   publish-to-pypi:
     name: Publish to PyPI
-    if: startsWith(github.ref, 'refs/tags/')  # only publish to PyPI on tag pushes
+    if: startsWith(github.ref, 'refs/tags/') || inputs.publish_to_pypi == "true"
     needs: build
     runs-on: ubuntu-latest
     environment:
@@ -54,8 +60,7 @@ jobs:
 
   github-release:
     name: Sign the distribution and upload to GitHub Release
-    needs:
-      - publish-to-pypi
+    needs: publish-to-pypi
     runs-on: ubuntu-latest
     permissions:
       contents: write  # IMPORTANT: mandatory for making GitHub Releases
