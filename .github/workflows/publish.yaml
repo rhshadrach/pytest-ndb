@@ -39,6 +39,7 @@ jobs:
           path: dist/
 
       - name: Echo
+        if: inputs.publish_to_pypi
         run: echo ${{ inputs.publish_to_pypi }} ${{ inputs.publish_to_pypi == 'true' }}
 
   publish-to-pypi:
