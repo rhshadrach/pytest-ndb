@@ -1,0 +1,34 @@
+name: Canary
+on:
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: "0 19 * * 5"
+permissions:
+  contents: read
+
+jobs:
+  canary:
+    concurrency:
+      group: tests-${{ github.event_name == 'push' && github.run_number || github.ref }}
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Install pytest
+        run: pip install --upgrade pytest
+
+      - name: Check version
+        run: |
+          if [ "$(pytest --version)" != "pytest 7.4.3" ]; then
+            echo "$(pytest --version)"
+            exit 1
+          fi
