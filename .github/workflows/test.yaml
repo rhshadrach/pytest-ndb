@@ -3,6 +3,8 @@ on:
   pull_request:
     branches:
       - main
+  schedule:
+    - cron: "*/0 19 * * 5"
 permissions:
   contents: read
 
@@ -38,6 +40,9 @@ jobs:
         run: pip freeze
 
       # Not good style, but we can avoid setup/teardown by additional run steps
+      - name: Install pytest 7.4.3
+        run: pip install pytest==7.4.3
+
       - name: Install pytest 7.4.2
         run: pip install pytest==7.4.2
 
