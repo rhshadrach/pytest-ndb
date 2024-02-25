@@ -28,7 +28,7 @@ jobs:
 
       - name: Check version
         run: |
-          if [ "$(pytest --version)" != "pytest 7.4.3" ]; then
+          if [ "$(pytest --version)" != "pytest 8.0.2" ]; then
             echo "$(pytest --version)"
             exit 1
           fi
