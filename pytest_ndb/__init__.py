@@ -76,12 +76,14 @@ def run(package, test: str) -> dict[str, Any]:
     from _pytest.config.exceptions import UsageError
     from _pytest.fixtures import FixtureRequest
     from _pytest.main import Session
+    from _pytest.runner import SetupState
 
     # We don't understand what finalizers do, and they seem to cause issues. So far
     # disabling them entirely has worked.
     def disable_finalizers(*args, **kwargs):
         pass
 
+    SetupState.addfinalizer = disable_finalizers
     FixtureRequest._schedule_finalizers = disable_finalizers
 
     path = (Path(package.__file__).parent / "..").resolve()
@@ -112,22 +114,16 @@ def run(package, test: str) -> dict[str, Any]:
     elif len(session.items) > 1:
         raise ValueError(f"Multiple tests found for {test}")
 
-    session_test = session.items[0]
-    request = session_test._request
+    item = session.items[0]
+    request = item._request
 
     kwargs = {}
-    for name in session_test.fixturenames:
-        # The request fixture doesn't require any setup
-        if name != "request":
-            fixturedef = session_test._fixtureinfo.name2fixturedefs[name][0]
-            request._compute_fixture_value(fixturedef)
+    for name in item.fixturenames:
         kwargs[name] = request.getfixturevalue(name)
 
-    test_function = _persistent_locals(session_test.function)
+    test_function = _persistent_locals(item.function)
     try:
-        test_function(
-            **{arg: kwargs[arg] for arg in session_test._fixtureinfo.argnames}
-        )
+        test_function(**{arg: kwargs[arg] for arg in item._fixtureinfo.argnames})
     except Exception:
         traceback.print_exc()
     finally:
