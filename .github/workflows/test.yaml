@@ -38,14 +38,14 @@ jobs:
         run: pip freeze
 
       # Not good style, but we can avoid setup/teardown by additional run steps
-      - name: Test 8.1.1
-        run: pip install pytest==8.0.2 && pytest tests/
+      - name: Test 8.2.0
+        run: pip install pytest==8.2.0 && pytest tests/
 
       - name: Test 8.1.2
-        run: pip install pytest==8.0.2 && pytest tests/
+        run: pip install pytest==8.1.2 && pytest tests/
 
       - name: Test 8.1.1
-        run: pip install pytest==8.0.2 && pytest tests/
+        run: pip install pytest==8.1.1 && pytest tests/
 
       # 8.1.0 was yanked
 
