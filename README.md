@@ -77,4 +77,4 @@ pip install pytest-ndb
 
 `pytest-ndb` is largely a hack on the `pytest` internals, and likely will always be. In addition, we must guess at the root path of your package, and in certain cases we may guess wrong. While we test this package using parametrizations and fixtures, other `pytest` features may not work.
 
-This package is rather new, and so users should not be surprised to encounter issues. Is something not working? Report an issue on our [GitHub issue tracker](https://github.com/rhshadrach/pytest-ndb/issues)!
+Is something not working? Report an issue on our [GitHub issue tracker](https://github.com/rhshadrach/pytest-ndb/issues)!
