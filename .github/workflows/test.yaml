@@ -12,7 +12,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ macos-latest, windows-latest, ubuntu-latest ]
-        python_version: [ "3.10", "3.11", "3.12", "3.13", "3.14" ]
+        python_version: [ "3.11", "3.12", "3.13", "3.14" ]
         install_xdist: [ true, false ]
     concurrency:
       group: tests-${{ github.event_name == 'push' && github.run_number || github.ref }}-${{ matrix.os }}-${{ matrix.python_version }}-$${{ matrix.install_xdist }}
@@ -42,7 +42,7 @@ jobs:
 
       # Not good style, but we can avoid setup/teardown by additional run steps
       - name: Test 9.0.2
-        run: pip install pytest==9.0.0 && pytest tests/
+        run: pip install pytest==9.0.2 && pytest tests/
 
       - name: Test 8.4.2
         run: pip install pytest==8.4.2 && pytest tests/
