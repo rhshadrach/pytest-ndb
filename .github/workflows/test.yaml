@@ -41,7 +41,7 @@ jobs:
         run: pip freeze
 
       # Not good style, but we can avoid setup/teardown by additional run steps
-      - name: Test 9.0.0
+      - name: Test 9.0.2
         run: pip install pytest==9.0.0 && pytest tests/
 
       - name: Test 8.4.2
